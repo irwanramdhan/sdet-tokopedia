@@ -1,0 +1,2 @@
+create_order_endpoint: '/main/api/create_order'
+order_details: '/main/api/order/'

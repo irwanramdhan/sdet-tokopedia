@@ -1,0 +1,11 @@
+<%
+    common_requires = "--require app --require step_definitions"
+%>
+
+default: <%= common_requires %> --format pretty --format html --out=report/<%= ENV['REPORT_PATH']%>/features_reports.html -f rerun  -o report/<%= ENV['REPORT_PATH']%>/rerun.txt
+# parallel: --format pretty --format html --out report/<%= ENV['REPORT_PATH']%>/features_report_<%= ENV['TEST_ENV_NUMBER']%>.html
+parallel: -p rake_run
+rake_run: <%= common_requires %> --format progress --format html --out report/<%= ENV['REPORT_PATH']%>/features_report<%= ENV['TEST_ENV_NUMBER']%>.html --format json --out=report/<%= ENV['REPORT_PATH']%>/cucumber<%= ENV['TEST_ENV_NUMBER']%>.json -f rerun  -o report/<%= ENV['REPORT_PATH']%>/rerun<%= ENV['TEST_ENV_NUMBER']%>.txt
+parallel_ci: <%= common_requires %> --format pretty --format json --out=report/<%= ENV['REPORT_PATH']%>/cucumber_<%= ENV['TEST_ENV_NUMBER']%>.json CI=true
+html_report: <%= common_requires %> --format pretty --format html --out=report/<%= ENV['REPORT_PATH']%>/features_reports.html
+jenkins: <%= common_requires %> -f pretty -f json --out=report/<%= ENV['REPORT_PATH']%>/cucumber.json CI=true

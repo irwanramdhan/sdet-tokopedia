@@ -1,0 +1,7 @@
+.idea/
+.byebug_history
+report/*
+rerun.txt
+selenium.log
+.vscode
+**/.DS_Store
